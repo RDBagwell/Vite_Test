@@ -62,8 +62,6 @@ document.addEventListener("keydown", e => keys[e.code] = true);
 document.addEventListener("keyup", e => keys[e.code] = false);
 
 function updatePlayer(delta) {
-  const SPEED = 4.0; // units per second
-
   // 1) Key amounts
   const forwardAmt = (keys["KeyW"] ? 1 : 0) - (keys["KeyS"] ? 1 : 0);
   const rightAmt   = (keys["KeyD"] ? 1 : 0) - (keys["KeyA"] ? 1 : 0);
@@ -82,7 +80,7 @@ function updatePlayer(delta) {
   step.addScaledVector(right, rightAmt);
 
   if (step.lengthSq() > 0) {
-    step.normalize().multiplyScalar(SPEED * delta);
+    step.normalize().multiplyScalar(player.speed * delta);
 
     // Try full move
     const before = { start: playerCollider.start.clone(), end: playerCollider.end.clone() };
