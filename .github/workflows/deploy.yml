@@ -2,7 +2,10 @@ name: Deploy Vite app to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # deploy when pushing to main branch
+    branches: [ main ]
+
+permissions:
+  contents: write   # ✅ allow action to push to gh-pages
 
 jobs:
   build-deploy:
@@ -27,3 +30,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+            
