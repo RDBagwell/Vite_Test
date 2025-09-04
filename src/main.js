@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { PointerLockControls } from "three/addons/controls/PointerLockControls.js";
-import Player from "./js/Player.js"
+import Player from "./js/player.js";
 
 import './style.css';
 
