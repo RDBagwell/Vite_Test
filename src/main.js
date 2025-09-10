@@ -21,6 +21,8 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+scene.add(player.camera);
+
 // Lights
 scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1));
 const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);

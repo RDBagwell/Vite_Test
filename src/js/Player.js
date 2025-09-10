@@ -1,13 +1,14 @@
 import * as THREE from "three";
 import CapsuleCollider from "./CapsuleCollider.js";
 import { checkCollision } from "./helpers.js";
+import Weapon from "./Weapon.js";
 
 class Player {
 
   constructor(
     playerOptions = {
       height: 1.8,
-      radius: 0.3,
+      radius: 1,
       speed: 5
     },
 
@@ -16,9 +17,9 @@ class Player {
     this.radius = playerOptions.radius;
     this.speed = playerOptions.speed;
 
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
     this.camera.position.set(0, this.height, 0);
-
+    
     this.raycaster = new THREE.Raycaster();
 
     this.collider = new CapsuleCollider(
@@ -29,14 +30,14 @@ class Player {
     // Track previous and current camera positions for interpolation
     this.prevCameraPos = new THREE.Vector3(0, this.height, 0);
     this.currCameraPos = new THREE.Vector3(0, this.height, 0);
+
+    // --- Weapon system ---
+    this.weapon = new Weapon(this.camera);
+
   }
 
   shoot(scene) {
-
-    this.raycaster.setFromCamera(new THREE.Vector2(0, 0), this.camera);
-    const intersects = this.raycaster.intersectObjects(scene.children, false);
-    console.log(intersects);
-
+    this.weapon.shoot(scene, this.camera);
   }
 
   update(delta, inputVec, colliders) {
